@@ -6,38 +6,44 @@ consulta
 Tenho que criar uma forma de pular o proximo quando a fila andar*/
 struct Queue_ {
     int *elements;
-    int front, rear, length, quantity;
+    int quantity, length;
 };
 
-Queue* create_queue(int length){
-    Queue* queue = (Queue*) malloc(sizeof(Queue));
-    if(queue != NULL){/*se ela estiver nula ele vai criar*/
-        queue->elements = (int*) malloc(length * sizeof(int));/*Ta fazendo aquela operação para ver quantos bytes são necessarios*/
-        queue->front = 0;
-        queue->rear = 0;
-        queue->quantity = 0;
-        queue->length = length;
-    }else{
-        free(queue)
-        return NULL
+*Queue create_queue(int length){
+    *Queue queue =(Queue*) malloc(sizeof(Queue));
+    queue->elements  = (int*)malloc(sizeof(int*));
+    queue->quantity = 0;  
+    queue->length = length;        
+};
+
+int insert(Queue* queue, int value){
+    if(queue =! NULL) return 1;/*n deveria ser se ela for nula?*/
+    if(queue->quantity >= queue->length)return 2;/*nao deveria ser maior ou igual?*/
+    queue->elements[queue->quantity]= value;
+    queue->quantity++
+    // queue->elements[queue->quantity++] = value;  Dessa forma ele n vai colocar o valor no quantity +1 aon inves de colocar no quantity?
+    return 0;
+};
+int remove(Queue* queue, int* value){
+    if(queue =! NULL) return 1;
+    if(queue-> quantity >= queue->lenght)return 2;
+    //*value = queue->elements[0];//Pq o professor colocou essa linha??
+    int i;
+    for(i=1;i<queue->quantity;i++){
+        queue->elements[i]= queue->elements[i-1]
     }
-    return stack
-}
-
-int insert(Queue* queue, int value){;/* insere o valor passado pelo parâmetro value no final da
-fila. Se o retorno da função for zero, a inserção foi realizada com sucesso.*/
-    if(queue == NULL) return 1; //Verifica se ta nulo
-    if(queue -> quantity == queue-> length) return 2; //Verifica se ta cheia
-
-    queue->element[queue->rear] = value;
-    queue->rear = (queue->rear + 1)
+    queue->quantity--
     return 0;
 }
+int peek(Queue* queue, int* value){
+    if(queue =! NULL) return 1;
+    if(queue->quantity == queue->lenght)return 2;
+    printf("O valor do primeiro da fila eh %d\n", queue->elements[0]);
+    return 0;
+}
+void free_queue(Queue* queue){
+    free(queue);
+    free(queue->elements);
+}
 
-int remove(Queue* queue, int* value);/* retira o valor do início da fila e devolve no ponteiro passado
-por parâmetro value. Se o retorno da função for zero, a remoção foi realizada
-com sucesso*/
-int peek(Queue* queue, int* value);/*onsulta o elemento que está no início da fila, sem retirá-lo.
-O retorno do valor do início da fila acontece pelo ponteiro value passado como
-parâmetro*/
-void free_queue(Queue* queue);
+   
